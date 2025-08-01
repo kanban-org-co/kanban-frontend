@@ -1,9 +1,13 @@
 import {Router} from "@/router";
+import {ThemeProvider} from "@emotion/react";
+import {theme} from "@/shared/theme";
 
 function App() {
 
   return (
-    <Router />
+    <ThemeProvider theme={theme}>
+      <Router />
+    </ThemeProvider>
   )
 }
 
