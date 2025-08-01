@@ -1,5 +1,6 @@
-import {Navigate} from "react-router-dom";
-import type {RouteObject} from "react-router-dom";
+import { Navigate } from "react-router-dom";
+
+import type { RouteObject } from "react-router-dom";
 
 const routes: RouteObject[] = [
   {
@@ -8,8 +9,8 @@ const routes: RouteObject[] = [
       {
         path: "dashboard",
         lazy: async () => {
-          const {Dashboard} = await import("@/pages/dashboard")
-          return {Component: Dashboard}
+          const { Dashboard } = await import("@/pages/dashboard");
+          return { Component: Dashboard };
         },
       }
     ]
@@ -18,6 +19,6 @@ const routes: RouteObject[] = [
     path: "*",
     element: <Navigate to="/dashboard"/>
   }
-]
+];
 
 export default routes;

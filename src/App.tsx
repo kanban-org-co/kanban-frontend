@@ -1,14 +1,14 @@
-import {Router} from "@/router";
-import {ThemeProvider} from "@emotion/react";
-import {theme} from "@/shared/theme";
+import { ThemeProvider } from "@emotion/react";
+
+import { Router } from "@/router";
+import { theme } from "@/shared/theme";
 
 function App() {
-
   return (
     <ThemeProvider theme={theme}>
-      <Router />
+      <Router/>
     </ThemeProvider>
-  )
+  );
 }
 
-export default App
+export default App;
