@@ -68,4 +68,6 @@ export const palette = {
     500: "#4A5A7A",
     600: "#607D8B", // текст и иконки
   },
+  shadow: "rgba(0, 0, 0, 0.06)",
+  white: "#FFFFFF"
 };

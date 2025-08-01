@@ -1,6 +1,12 @@
+import { KanbanBoard } from "@/widgets/kanban-board";
+
+import { PageWrapper } from "./dashboard.styles";
+
 const Dashboard = () => {
   return (
-    <div>hello</div>
+    <PageWrapper>
+      <KanbanBoard/>
+    </PageWrapper>
   );
 };
 
