@@ -29,15 +29,3 @@ export const TaskList = styled.div`
   min-height: 60px;
   gap: 8px;
 `;
-
-export const TaskAddButton = styled.button`
-    width: 100%;
-
-  background-color: ${palette.primary["300"]};
-
-  appearance: none;
-  border: none;
-  outline: none;
-
-  height: 30px;
-`;

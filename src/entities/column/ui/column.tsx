@@ -1,12 +1,14 @@
 import React from "react";
 import { Droppable } from "@hello-pangea/dnd";
+import { FiPlus } from "react-icons/fi";
 
+import { Button } from "@/shared/ui/button";
 import { TaskCard } from "@/entities/task";
 
 import {
   ColumnWrapper,
   ColumnTitle,
-  TaskList, TaskAddButton,
+  TaskList
 } from "./column.styles";
 
 import type { Column as ColumnType, Task as TaskType } from "@/shared/model/kanban";
@@ -33,7 +35,7 @@ export const Column: React.FC<ColumnProps> = ({ column, tasks }) => {
           </TaskList>
         )}
       </Droppable>
-      <TaskAddButton>Добавить задачу</TaskAddButton>
+      <Button icon={<FiPlus/>} type="primary">Добавить задачу</Button>
     </ColumnWrapper>
   );
 };
