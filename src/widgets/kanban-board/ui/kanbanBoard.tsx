@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  DragDropContext
+  DragDropContext, Draggable, Droppable
 } from "@hello-pangea/dnd";
 
 import { Column } from "@/entities/column";
@@ -20,9 +20,21 @@ export const KanbanBoard: React.FC = () => {
   // }
 
   const onDragEnd = (result: DropResult) => {
-    const { source, destination, draggableId } = result;
+    const { source, destination, draggableId, type } = result;
 
     if (!destination) return;
+
+    if (type === "column") {
+      const newOrder = [...board.columnOrder];
+      newOrder.splice(source.index, 1);
+      newOrder.splice(destination.index, 0, draggableId);
+
+      setBoard((prev) => ({
+        ...prev,
+        columnOrder: newOrder,
+      }));
+      return;
+    }
 
     const sourceCol = board.columns[source.droppableId];
     const targetCol = board.columns[destination.droppableId];
@@ -60,14 +72,37 @@ export const KanbanBoard: React.FC = () => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd} onBeforeCapture={() => {}} >
-      <BoardWrapper>
-        {board.columnOrder.map((columnId) => {
-          const column = board.columns[columnId];
-          const tasks = column.taskIds.map((taskId) => board.tasks[taskId]);
+      <Droppable
+        droppableId="board"
+        direction="horizontal"
+        type="column"
+      >
+        {(droppableProvided) => (
+          <BoardWrapper
+            ref={droppableProvided.innerRef}
+            {...droppableProvided.droppableProps}
+          >
+            {board.columnOrder.map((columnId, index) => {
+              const column = board.columns[columnId];
+              const tasks = column.taskIds.map((taskId) => board.tasks[taskId]);
 
-          return <Column key={column.id} column={column} tasks={tasks} />;
-        })}
-      </BoardWrapper>
+              return (
+                <Draggable draggableId={column.id} key={column.id} index={index}>
+                  {(draggableProvided) => (
+                    <div
+                      ref={draggableProvided.innerRef}
+                      {...draggableProvided.draggableProps}
+                      {...draggableProvided.dragHandleProps}
+                    >
+                      <Column column={column} tasks={tasks} />
+                    </div>
+                  )}
+                </Draggable>
+              );
+            })}
+          </BoardWrapper>
+        )}
+      </Droppable>
     </DragDropContext>
   );
 };
