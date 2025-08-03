@@ -2,6 +2,7 @@ import { type FC, useState } from "react";
 import { FiPlus } from "react-icons/fi";
 
 import { Button } from "@/shared/ui/button";
+import { Input } from "@/shared/ui/input";
 
 import { Container } from "./inlineAddTask.styles.ts";
 import { useAddTask } from "../../model/useAddTask.ts";
@@ -22,14 +23,20 @@ const InlineAddTask: FC<InlineAddTaskProps> = ({ columnId }) => {
     setEditing(false);
   };
 
+  const handleBlur = () => {
+    setTitle("");
+    setEditing(false);
+  };
+
   if (isEditing) {
     return (
       <Container>
-        <input
+        <Input
           autoFocus
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          onBlur={handleBlur}
         />
         <Button onClick={handleSave}>Сохранить задачу</Button>
       </Container>
