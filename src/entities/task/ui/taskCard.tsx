@@ -1,7 +1,7 @@
 import React from "react";
 import { Draggable } from "@hello-pangea/dnd";
 
-import { Card, Title, Description } from "./taskCard.styles";
+import { Card, Title } from "./taskCard.styles";
 
 import type { Task } from "@/shared/model/kanban/kanban.ts";
 
@@ -22,7 +22,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onClick, index }) => {
           onClick={onClick}
         >
           <Title>{task.title}</Title>
-          {task.description && <Description>{task.description}</Description>}
+          {/*{task.description && <Description>{task.description}</Description>}*/}
         </Card>
       )}
     </Draggable>

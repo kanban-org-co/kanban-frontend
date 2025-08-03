@@ -1,8 +1,9 @@
 import { makeAutoObservable } from "mobx";
+import { nanoid } from "nanoid";
 
 import { mockBoard } from "./kanban.mock";
 
-import type { KanbanBoard } from "./kanban";
+import type { KanbanBoard, Task } from "./kanban";
 
 class KanbanStore {
   board: KanbanBoard = mockBoard;
@@ -52,6 +53,33 @@ class KanbanStore {
     this.board = {
       ...this.board,
       columnOrder: newOrder,
+    };
+  };
+
+  addTask = (columnId: string, title: string) => {
+    const column = this.board.columns[columnId];
+    if (!column) return;
+
+    const newTaskId = nanoid();
+    const newTask: Task = {
+      id: newTaskId,
+      title,
+      createdAt: new Date().toISOString(),
+    };
+
+    this.board = {
+      ...this.board,
+      tasks: {
+        ...this.board.tasks,
+        [newTaskId]: newTask,
+      },
+      columns: {
+        ...this.board.columns,
+        [columnId]: {
+          ...column,
+          taskIds: [...column.taskIds, newTaskId],
+        },
+      },
     };
   };
 }

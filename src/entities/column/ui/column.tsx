@@ -1,9 +1,8 @@
 import React from "react";
 import { Droppable } from "@hello-pangea/dnd";
-import { FiPlus } from "react-icons/fi";
 
-import { Button } from "@/shared/ui/button";
 import { TaskCard } from "@/entities/task";
+import { InlineAddTask } from "@/features/add-task";
 
 import {
   ColumnWrapper,
@@ -35,7 +34,7 @@ export const Column: React.FC<ColumnProps> = ({ column, tasks }) => {
           </TaskList>
         )}
       </Droppable>
-      <Button icon={<FiPlus/>} type="primary">Добавить задачу</Button>
+      <InlineAddTask columnId={column.id}/>
     </ColumnWrapper>
   );
 };

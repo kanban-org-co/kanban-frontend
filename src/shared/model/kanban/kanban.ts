@@ -4,7 +4,7 @@ export type ColumnId = string;
 export interface Task {
   id: TaskId;
   title: string;
-  description?: string;
+  // description?: string;
   createdAt: string;
   updatedAt?: string;
 }
