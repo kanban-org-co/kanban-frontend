@@ -1,8 +1,7 @@
-import React from "react";
+import React, { type ReactNode } from "react";
 import { Droppable } from "@hello-pangea/dnd";
 
 import { TaskCard } from "@/entities/task";
-import { InlineAddTask } from "@/features/add-task";
 
 import {
   ColumnWrapper,
@@ -15,9 +14,10 @@ import type { Column as ColumnType, Task as TaskType } from "@/shared/model/kanb
 interface ColumnProps {
   column: ColumnType;
   tasks: TaskType[];
+  renderAddTask: ReactNode;
 }
 
-export const Column: React.FC<ColumnProps> = ({ column, tasks }) => {
+export const Column: React.FC<ColumnProps> = ({ column, tasks, renderAddTask }) => {
   return (
     <ColumnWrapper>
       <ColumnTitle>{column.title}</ColumnTitle>
@@ -28,13 +28,17 @@ export const Column: React.FC<ColumnProps> = ({ column, tasks }) => {
             {...provided.droppableProps}
           >
             {tasks.map((task, index) => (
-              <TaskCard key={task.id} task={task} index={index}/>
+              <TaskCard
+                key={task.id}
+                task={task}
+                index={index}
+              />
             ))}
             {provided.placeholder}
           </TaskList>
         )}
       </Droppable>
-      <InlineAddTask columnId={column.id}/>
+      {renderAddTask}
     </ColumnWrapper>
   );
 };

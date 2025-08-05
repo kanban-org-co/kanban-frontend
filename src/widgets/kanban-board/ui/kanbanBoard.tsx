@@ -6,6 +6,7 @@ import { observer } from "mobx-react-lite";
 
 import { Column } from "@/entities/column";
 import { kanbanStore } from "@/shared/model/kanban";
+import { InlineAddTask } from "@/features/add-task";
 
 import { BoardWrapper } from "./kanbanBoard.styles";
 
@@ -51,7 +52,11 @@ export const KanbanBoard: React.FC = observer(() => {
                       {...draggableProvided.draggableProps}
                       {...draggableProvided.dragHandleProps}
                     >
-                      <Column column={column} tasks={tasks} />
+                      <Column
+                        column={column}
+                        tasks={tasks}
+                        renderAddTask={<InlineAddTask columnId={column.id} />}
+                      />
                     </div>
                   )}
                 </Draggable>

@@ -7,8 +7,10 @@ import { Input } from "@/shared/ui/input";
 import { Container } from "./inlineAddTask.styles.ts";
 import { useAddTask } from "../../model/useAddTask.ts";
 
+import type { ColumnId } from "@/shared/model/kanban";
+
 interface InlineAddTaskProps {
-  columnId: string;
+  columnId: ColumnId;
 }
 
 const InlineAddTask: FC<InlineAddTaskProps> = ({ columnId }) => {
@@ -23,11 +25,6 @@ const InlineAddTask: FC<InlineAddTaskProps> = ({ columnId }) => {
     setEditing(false);
   };
 
-  const handleBlur = () => {
-    setTitle("");
-    setEditing(false);
-  };
-
   if (isEditing) {
     return (
       <Container>
@@ -36,7 +33,6 @@ const InlineAddTask: FC<InlineAddTaskProps> = ({ columnId }) => {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          onBlur={handleBlur}
         />
         <Button onClick={handleSave}>Сохранить задачу</Button>
       </Container>

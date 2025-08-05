@@ -82,6 +82,27 @@ class KanbanStore {
       },
     };
   };
+
+  deleteTask = (taskId: string) => {
+    const newTasks = { ...this.board.tasks };
+    delete newTasks[taskId];
+
+    const newColumns = Object.fromEntries(
+      Object.entries(this.board.columns).map(([columnId, column]) => [
+        columnId,
+        {
+          ...column,
+          taskIds: column.taskIds.filter((id) => id !== taskId),
+        },
+      ])
+    );
+
+    this.board = {
+      ...this.board,
+      tasks: newTasks,
+      columns: newColumns,
+    };
+  };
 }
 
 export const kanbanStore = new KanbanStore();
